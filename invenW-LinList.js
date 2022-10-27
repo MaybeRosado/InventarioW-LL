@@ -12,20 +12,16 @@
     }
   
 
-  add(data){
-    let newNode = new Node(data, null)
-    if(!this.head){
-        this.head = newNode;
-
-    }else{
-        let current = this.head;
-        while(current.next){
-            current = current.next;
+    add(nuevo){
+        if (this.primero==null)
+          this.primero=nuevo;
+        else{
+          let temp=this.primero;
+          while (temp.next!=null)
+            temp=temp.next;
+          temp.next=nuevo;
         }
-        current.next = newNode;
-    }
-    this.size++
-  }
+      }
 
   list(){
     let res="";
@@ -54,8 +50,6 @@ insertAt(data, index){
             current = current.next
 
              }
-
-
              newNode.next = current;
              previus.next = newNode;
         }
@@ -131,34 +125,48 @@ save.addEventListener('click', function(){
     let cost = document.getElementById("eCost").value;
 
     let pNuevo = new Product(name, code, cantidad, cost);
-     inventory2.add(pNuevo)
+     inventory2.add(pNuevo);
+     document.getElementById("listar").innerHTML = "<p>Se agrego el producto correctamente</p>"
 })
 
 const remove =document.getElementById("remove");
 remove.addEventListener('click', function(){
-console.log(inventory2.removeData(document.getElementById("eCode").value));
+    const Delete = inventory2.removeData(document.getElementById(remove).value)
+    document.getElementById("remove").value = ""
+    if(Delete == true){
+        document.getElementById("list").innerHTML = "<h4> El prodcuto se ha eliminado </h4>"
+        }else{
+            document.getElementById("list").innerHTML = "<h4> El producto no existe </h4>"
+        }
 })
 
 
 
 const listIndex = document.getElementById("insertAt");
 insertAt.addEventListener('click', function(){
-console.log(inventory2.insertAt())
+
+    
+
 })
 
 /*const search=document.getElementById("search");
 search.addEventListener('click', function(){
-    inventory2.search()
+    
 })*/
 
 const list=document.getElementById("list");
 list.addEventListener('click', function(){
-    console.log(inventory2.list())
+    if(inventory2.list()){
+        document.getElementById("list").innerHTML = `${inventory2.list()}`
+
+    }else{
+        document.getElementById("list").innerHTML = "<h4> No hay productos en nuestra bodega </h4>"
+    }
 })
 
 /*const reverseList=document.getElementById("reverseList");
 reverseList.addEventListener('click', function(){
-    console.log(inventory2.reverseList())
+    
 })*/
 
 

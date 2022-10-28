@@ -1,3 +1,23 @@
+class Product{
+    constructor(code, name, amount, cost){
+        this.code = code;
+        this.name = name;
+        this.amount = amount;
+        this.cost = cost;
+  
+    }
+  
+    info(){
+        return `Código: ${this.code()}  Nombre: ${this.name()}  Cantidad: ${this.amount()}  Costo: ${this.cost()}`
+    }
+  
+  
+  }
+  
+  
+  
+  
+  
   class Node{
     constructor(data, next){
         this.data = data
@@ -7,7 +27,7 @@
 
   class Inventory{
     constructor(){
-        this.head = null
+        this.primero= null
         this.size = 0;
     }
   
@@ -23,11 +43,11 @@
         }
       }
 
-  list(){
+  list(){ 
     let res="";
     let temp=this.primero;
     while(temp!=null){
-        res+=temp.numero + "  ";
+        res+=temp.info;
         temp=temp.next;
     }
     return res;
@@ -38,11 +58,11 @@ insertAt(data, index){
         return null;
     }
     const newNode = new Node(data)
-    let current = this.head
+    let current = this.primero
     let previus;
     if(index == 0){
         newNode.next = current;
-        this.head = newNode;
+        this.primero = newNode;
 
     }else{
         for(let i = 0; i < index; i++){
@@ -57,12 +77,12 @@ insertAt(data, index){
     }
 
 removeData(data){
-    let current = this.head;
+    let current = this.primero;
     let previus = null;
     while(current != null){
         if(current.data === data){
             if(!previus){
-                this.head = current.next;
+                this.primero = current.next;
             }else{
                 previus.next = current.next
             }
@@ -76,63 +96,42 @@ removeData(data){
     return null;
 }
 
+search(code){
+    let current = this.primero
+    while(current != null){
+        if(current == code){
+            return current.info
+        }else{
+            return null;
+        }
+
+
+    }
 
 }
 
 
-
-class Product{
-    constructor(code, name, amount, cost){
-        this.code = code;
-        this.name = name;
-        this.amount = amount;
-        this.cost = cost;
-  
-    }
-  
-    info(){
-        return `Código: ${getCode()}  Nombre: ${getName()}  Cantidad: ${getAmount()}  Costo: ${getCost()}`
-    }
-  
-    getCode(){
-        return this.code;
-    }
-  
-    getName(){
-        return this.name;
-    }
-  
-    getAmount(){
-        return this.amount;
-    }
-  
-    getCost(){
-        return this.cost
-    }
-  
-  }
-
-
+}
 
 
 let inventory2 = new Inventory();
 
-const save =document.getElementById("save");
-save.addEventListener('click', function(){
-    let name=document.getElementById("eName").value;
-    let code = document.getElementById("eCode").value;
-    let cantidad = document.getElementById("eAmount").value;
-    let cost = document.getElementById("eCost").value;
+const agregar = document.getElementById("addBtn");
+agregar.addEventListener('click', function(){
+    let name=document.getElementById("name").value;
+    let code = document.getElementById("code").value;
+    let cantidad = document.getElementById("amount").value;
+    let cost = document.getElementById("price").value;
 
     let pNuevo = new Product(name, code, cantidad, cost);
      inventory2.add(pNuevo);
-     document.getElementById("listar").innerHTML = "<p>Se agrego el producto correctamente</p>"
+     document.getElementById("listOfProducts").innerHTML = "<p>Se agrego el producto correctamente</p>"
 })
 
-const remove =document.getElementById("remove");
+const remove =document.getElementById("deleteBtn");
 remove.addEventListener('click', function(){
-    const Delete = inventory2.removeData(document.getElementById(remove).value)
-    document.getElementById("remove").value = ""
+    const Delete = inventory2.removeData(document.getElementById("productDel").value)
+    document.getElementById("remove").value = ``
     if(Delete == true){
         document.getElementById("list").innerHTML = "<h4> El prodcuto se ha eliminado </h4>"
         }else{
@@ -142,32 +141,42 @@ remove.addEventListener('click', function(){
 
 
 
-const listIndex = document.getElementById("insertAt");
-insertAt.addEventListener('click', function(){
+// const listIndex = document.getElementById("insertAt");
+// insertAt.addEventListener('click', function(){
 
     
 
+// })
+
+const search=document.getElementById("search");
+search.addEventListener('click', function(){
+    const code = inventory2.search(document.getElementById("searchCode").value)
+    document.getElementById("searchCode").value = ``
+    if(code != null){
+        return `${code.info}`
+    }else{
+        document.getElementById("list").innerHTML = `<h4>El producto no existe</h4>`
+
+    }
+
+
+    
 })
 
-/*const search=document.getElementById("search");
-search.addEventListener('click', function(){
-    
-})*/
-
-const list=document.getElementById("list");
-list.addEventListener('click', function(){
+const List=document.getElementById("listBtn"); 
+List.addEventListener('click', function(){
     if(inventory2.list()){
-        document.getElementById("list").innerHTML = `${inventory2.list()}`
+        document.getElementById("listOfProducts").innerHTML = `${inventory2.list()}`
 
     }else{
-        document.getElementById("list").innerHTML = "<h4> No hay productos en nuestra bodega </h4>"
+        document.getElementById("listOfProducts").innerHTML = "<h4> No hay productos en nuestra bodega </h4>"
     }
 })
 
-/*const reverseList=document.getElementById("reverseList");
-reverseList.addEventListener('click', function(){
+// const reverseList=document.getElementById("reverseList");
+// reverseList.addEventListener('click', function(){
     
-})*/
+// })
 
 
 

@@ -19,34 +19,43 @@
         <h1>Abarrotes Juanito</h1> 
     </header>
 <body>
-
-    <form>
-        <label for="eName">
-            Nombre del producto: <input type="text" id="eName"><br><br>
-        </label><br>
-        <label for="eCode">
-            Código: <input type="text" id="eCode"><br><br>
-        </label><br>
-        <label for="eAmount">
-            Cantidad: <input type="text" id="eAmount"><br><br>
-        </label><br>
-        <label for="eCost">
-            Costo: <input type="text" id="eCost"><br><br>
-        </label><br>
-
-        <button type="button" id="save">Guardar</button> <br> <br>
-        <button type="button" id="remove">Eliminar</button> <br> <br>
-        <button type="button" id="search">Buscar</button> <br> <br>
-        <button type="button" id="list">Listar</button> <br> <br>
-        <button type="button" id="insertAt">Insetrar en</button> <br> <br>
-        <button type="button" id="reverseList">Listado inverso</button> <br> <br>
+<div id="add">
+    <form id="addForm">
+        <input type="number" id="code" placeholder="Codigo del producto"> <br> <br>
+        <input type="text" id="name" placeholder="Nombre del producto"> <br> <br>
+        <input type="number" id="amount" placeholder="Cantidad del producto"> <br> <br>
+        <input type="number" id="price" placeholder="Costo del producto"> <br> <br>
+        <input type="button" id="addBtn" value="Añadir"> <br> <br>
     </form>
-
-    <script src="invenW-LinList.js"></script>
 </div>
 
-<div id="detalles"></div>
+<div id="buttons">
+    <form id="searchPr">
+        <h3>Busqueda y listado</h3>
+        <input type="number" id="searchCode" placeholder="Buscar producto"> <br> <br>
+        <input type="button" value="Buscar" id="searchBtn"> <br> <br>
+        <input type="button" value="Listar" id="listBtn"> <br> <br>
+      <input type="button" value="Listar Inverso" id="btnRV" > <br> <br>
+    </form>
+</div>
 
+
+<div id="Delete">
+    <form id="deleteForm">
+        <h3>Eliminar</h3>
+        <input type="number" id="productDel" placeholder="ELiminar producto"> <br> <br>
+        <input type="button" id="deleteBtn" value="Eliminar"> <br>
+        
+    </form>
+</div>
+
+<div id="details">
+    <h4 id="listOfProducts"></h4>
+
+</div>
+
+
+<script src="invenW-LinList.js"></script>
 </body>
 </html>
 </body>
